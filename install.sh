@@ -17,4 +17,4 @@ cp _vimrc ~/.vimrc
 
 vim +PluginInstall +qall
 # pip install autopep8
-pip3 install autopep8
+pip3 install autopep8 flake8

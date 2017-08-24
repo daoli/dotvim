@@ -14,6 +14,9 @@ set encoding=utf-8
 set clipboard=unnamed
 set noswapfile
 
+" Set number of colors to be compatable in tmux
+set t_Co=256
+
 " Go to end/start of line in insert mode
 inoremap <C-e> <C-o>$
 inoremap <C-a> <C-o>0
