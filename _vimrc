@@ -14,7 +14,9 @@ set encoding=utf-8
 set clipboard=unnamed
 set noswapfile
 
-
+" Go to end/start of line in insert mode
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
 
 " Fast saving
 nmap <leader>w :w!<cr>
