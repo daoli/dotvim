@@ -43,8 +43,8 @@ Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'Townk/vim-autoclose'
+"Plugin 'tpope/vim-surround'
+"Plugin 'Townk/vim-autoclose'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
