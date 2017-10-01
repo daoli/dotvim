@@ -277,12 +277,48 @@ if has('python')
 py << EOF
 import os.path
 import sys
+import site
 import vim
+
+
+# See: https://github.com/python-mode/python-mode/pull/609/files
+def _activate_env_from_path(env_path):
+    """ Fix when `activate_this.py` does not exist.
+        For Python 3.3 and newer, a new command-line tool `pyvenv` create venv
+        will not provide 'activate_this.py'.
+    """
+    prev_sys_path = list(sys.path)
+
+    if sys.platform == 'win32':
+        site_packages_paths = [os.path.join(env_path, 'Lib', 'site-packages')]
+    else:
+        lib_path = os.path.join(env_path, 'lib')
+        site_packages_paths = [os.path.join(lib_path, lib, 'site-packages')
+                               for lib in os.listdir(lib_path)]
+    for site_packages_path in site_packages_paths:
+        site.addsitedir(site_packages_path)
+
+    sys.real_prefix = sys.prefix
+    sys.prefix = env_path
+    sys.exec_prefix = env_path
+
+    # Move the added items to the front of the path:
+    new_sys_path = []
+    for item in list(sys.path):
+        if item not in prev_sys_path:
+            new_sys_path.append(item)
+            sys.path.remove(item)
+    sys.path[:0] = new_sys_path
+
 if 'VIRTUAL_ENV' in os.environ:
     project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
+    try:
+        sys.path.insert(0, project_base_dir)
+        activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+        execfile(activate_this, dict(__file__=activate_this))
+    except IOError:
+        _activate_env_from_path(project_base_dir)
+
 EOF
 endif
 
