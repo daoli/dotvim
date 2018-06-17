@@ -45,6 +45,7 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'kien/ctrlp.vim'
 "Plugin 'tpope/vim-surround'
 "Plugin 'Townk/vim-autoclose'
+Plugin 'thaerkh/vim-workspace'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,6 +53,7 @@ filetype plugin indent on    " required
 " don't show autopep8 diff
 let g:autopep8_disable_show_diff=1
 
+nnoremap <leader>s :ToggleWorkspace<CR>
 
 fu! SplitScroll()
     :wincmd v
