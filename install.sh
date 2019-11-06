@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# On Ubuntu
+# sudo apt install neovim
+# mkdir -p ~/.config/nvim
+# cp ./init.vim ~/.config/nvim/init.vim
+# python2 -m pip install -U pynvim
+# python3 -m pip install -U pynvim
+
 # .vim dir
 if [ -e ~/.vim/bundle/Vundle.vim ]
 then
